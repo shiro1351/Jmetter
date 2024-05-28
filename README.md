@@ -1,32 +1,89 @@
-Jmeter
-Báo Cáo Kiểm Thử JMeter Giới Thiệu
+Để thực hiện các bài kiểm tra hiệu năng như bạn yêu cầu, chúng ta sẽ tiến hành theo các bước chi tiết sau đây:
+ 1. Kiểm tra hiệu năng trang web
 
-Mục Đích Của Kiểm Thử: Mục đích của kiểm thử JMeter này là đánh giá hiệu suất và độ ổn định của ứng dụng web dưới các điều kiện tải giả lập.
+ Lựa chọn trang web
+Chọn một trang web đơn giản, chẳng hạn như trang web của trường học hoặc trang web cá nhân. Ví dụ: http://example.com (giả định là trang web của bạn).
 
-Mô Tả Hệ Thống Được Kiểm Thử: Hệ thống được kiểm thử là một ứng dụng web được lưu trữ trên máy chủ chạy hệ điều hành Mac OS X (phiên bản 14.5) với phiên bản Java 21.0.1.
+ Tạo kịch bản kiểm tra với jMeter
+1. Cài đặt Apache jMeter: Tải và cài đặt jMeter từ trang chủ Apache jMeter.
+2. Tạo Test Plan: Mở jMeter và tạo một Test Plan mới.
+3. Thêm Thread Group: Trong Test Plan, thêm một Thread Group để mô phỏng người dùng.
+   - Số lượng threads (người dùng): 100
+   - Ramp-up period: 10 giây
+   - Loop count: 10
+4. Thêm HTTP Request Defaults: Thiết lập server name hoặc IP (ví dụ: example.com) trong HTTP Request Defaults.
+5. Thêm HTTP Request: Thêm HTTP Request để chỉ định trang web cần kiểm tra (ví dụ: /home).
+6. Thêm Listener: Thêm View Results in Table, Summary Report, hoặc Graph Results để ghi lại kết quả.
 
-Môi Trường Và Cấu Hình Kiểm Thử:
+ Chạy kịch bản kiểm tra
+1. Chạy Test Plan trong jMeter.
+2. Ghi lại kết quả từ các Listener.
 
-Hệ Điều Hành: Mac OS X 14.5 Phiên Bản Java: 21.0.1 Phiên Bản JMeter: 5.6.3 Kế Hoạch Kiểm Thử
+ Phân tích kết quả
+- Thời gian phản hồi (Response Time): Trung bình thời gian phản hồi của mỗi yêu cầu.
+- Số lượng yêu cầu thành công (Successful Requests): Tỷ lệ yêu cầu trả về mã trạng thái 2xx.
+- Số lượng yêu cầu thất bại (Failed Requests): Tỷ lệ yêu cầu trả về mã trạng thái lỗi (4xx, 5xx).
 
-Kế hoạch kiểm thử bao gồm các kịch bản sau:
+ Kết luận
+Dựa trên các kết quả, đánh giá hiệu năng của trang web. Ví dụ, nếu thời gian phản hồi trung bình là dưới 2 giây và tỷ lệ thành công cao (trên 95%), thì hiệu năng trang web được coi là tốt.
 
-Tải các thuộc tính người dùng từ user.properties Tải các thuộc tính hệ thống từ system.properties Kết Quả
+ 2. Kiểm tra hiệu năng API
 
-Vì tệp nhật ký chủ yếu chứa các nhật ký cấu hình và thiết lập mà không có các chỉ số hiệu suất cụ thể, nên kết quả chi tiết không có sẵn. Thông thường, kết quả sẽ bao gồm các chỉ số như thời gian phản hồi, thông lượng và tỷ lệ lỗi.
+ Lựa chọn API
+Chọn một API đơn giản như API thời tiết (ví dụ: https://api.openweathermap.org/data/2.5/weather).
 
-Phân Tích
+ Tạo kịch bản kiểm tra với jMeter
+1. Tạo Test Plan mới trong jMeter.
+2. Thêm Thread Group: Cấu hình như trên.
+3. Thêm HTTP Request Defaults**: Thiết lập server name (api.openweathermap.org).
+4. Thêm HTTP Request: Chỉ định endpoint API (ví dụ: /data/2.5/weather?q=London&appid=your_api_key).
+5. Thêm Listener: Như trên.
 
-Các mục nhật ký cho thấy việc khởi tạo và thiết lập môi trường JMeter thành công. Các chi tiết cấu hình chính bao gồm:
+ Chạy kịch bản kiểm tra
+1. Chạy Test Plan.
+2. Ghi lại kết quả.
 
-Ngôn Ngữ: en_VN Máy Ảo Java: Java HotSpot(TM) 64-Bit Server VM Kiến Trúc Hệ Thống: aarch64 Không có lỗi hoặc cảnh báo nào được tìm thấy trong các đoạn nhật ký đã cung cấp.
+ Phân tích kết quả
+- Thời gian phản hồi (Response Time).
+- Số lượng yêu cầu thành công (Successful Requests).
+- Số lượng yêu cầu thất bại (Failed Requests).
 
-Kết Luận và Khuyến Nghị
+ Kết luận
+Đánh giá hiệu năng của API dựa trên các kết quả trên.
 
-Tóm Tắt Kết Quả:
+ 3. So sánh hiệu năng của hai trang web hoặc API
 
-Môi trường JMeter đã được thiết lập chính xác với các cấu hình đã chỉ định. Không có các chỉ số hiệu suất nào có sẵn trong tệp nhật ký đã cung cấp. Khuyến Nghị Cho Các Kiểm Thử Trong Tương Lai:
+ Lựa chọn đối tượng để so sánh
+Chọn hai trang web hoặc API có chức năng tương tự. Ví dụ, hai trang web trường học khác nhau hoặc hai API thời tiết khác nhau.
 
-Đảm bảo rằng các nhật ký kết quả kiểm thử chi tiết được ghi lại, bao gồm thời gian phản hồi, thông lượng và tỷ lệ lỗi. Sử dụng các công cụ nghe của JMeter như "Summary Report" hoặc "View Results Tree" để thu thập và phân tích các chỉ số hiệu suất. Xuất kết quả kiểm thử dưới định dạng CSV hoặc XML để phân tích chi tiết. Các Bước Tiếp Theo:
+Tạo kịch bản kiểm tra
+Lặp lại các bước trên cho cả hai đối tượng, tạo ra các Test Plan riêng biệt.
 
-Chạy lại các kiểm thử JMeter với các công cụ nghe phù hợp được kích hoạt để thu thập các chỉ số hiệu suất. Phân tích các nhật ký mới để xác định bất kỳ nút thắt cổ chai về hiệu suất hoặc các khu vực cần cải thiện. Đây là báo cáo cơ bản dựa trên tệp nhật ký đã cung cấp. Để có báo cáo toàn diện hơn, cần có các nhật ký kiểm thử hiệu suất chi tiết.
+Chạy kịch bản kiểm tra và ghi lại kết quả
+Chạy các Test Plan và ghi lại kết quả từ các Listener.
+
+So sánh kết quả
+- Thời gian phản hồi (Response Time): So sánh thời gian phản hồi trung bình.
+- Số lượng yêu cầu thành công (Successful Requests): So sánh tỷ lệ thành công.
+- Số lượng yêu cầu thất bại (Failed Requests): So sánh tỷ lệ thất bại.
+
+ Đưa ra kết luận
+Trang web hoặc API nào có thời gian phản hồi ngắn hơn, tỷ lệ yêu cầu thành công cao hơn và tỷ lệ yêu cầu thất bại thấp hơn thì được coi là có hiệu năng tốt hơn.
+
+Ví dụ cụ thể
+
+ Kiểm tra hiệu năng trang web
+- Trang web A: example.com
+  - Thời gian phản hồi trung bình: 1.5 giây
+  - Tỷ lệ yêu cầu thành công: 98%
+  - Tỷ lệ yêu cầu thất bại: 2%
+
+- Trang web B: example.edu
+  - Thời gian phản hồi trung bình: 2 giây
+  - Tỷ lệ yêu cầu thành công: 95%
+  - Tỷ lệ yêu cầu thất bại: 5%
+
+ Kết luận
+Trang web A có hiệu năng tốt hơn trang web B dựa trên các tiêu chí so sánh.
+
+Bằng cách thực hiện các bước trên, bạn có thể đánh giá và so sánh hiệu năng của trang web hoặc API một cách chi tiết và chính 
